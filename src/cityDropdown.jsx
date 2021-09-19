@@ -1,5 +1,4 @@
 import React from 'react';
-import DropdownOption from './dropdownOption';
 
 class CityDropdown extends React.Component {
   constructor(props) {
@@ -10,6 +9,7 @@ class CityDropdown extends React.Component {
     this.allowFilter = this.allowFilter.bind(this);
     this.closeDropdown = this.closeDropdown.bind(this);
     this.filterDropdown = this.filterDropdown.bind(this);
+    this.submitValue = this.submitValue.bind(this);
   }
 
   allowFilter(e) {
@@ -21,10 +21,19 @@ class CityDropdown extends React.Component {
     // })
   }
 
+  submitValue(e) {
+    e.preventDefault();
+    document.querySelector(".chosen-value").value = e.target.innerText
+    this.props.submitForm(e)
+    this.closeDropdown(e)
+  }
+
   closeDropdown(e) {
     const dropdown = document.querySelector(".value-list")
-    e.target.placeholder = "Select..";
+    const inputEle = document.querySelector(".chosen-value")
+    inputEle.placeholder = "Select..";
     dropdown.classList.remove("open")
+    this.setState({options: []})
   }
 
   filterDropdown(e) {
@@ -40,6 +49,8 @@ class CityDropdown extends React.Component {
       }
     }
     this.setState({options: options})
+
+    // document.querySelector("body").addEventListener("click", this.closeDropdown)
   }
 
   render() {
@@ -50,13 +61,14 @@ class CityDropdown extends React.Component {
           className="chosen-value"
           placeholder="Select.."
           onFocus={this.allowFilter}
-          onBlur={this.closeDropdown}
           onInput={this.filterDropdown}
         />
         <ul className="value-list">
           { 
-            this.state.options.map(city => (
-              <DropdownOption cityName={city} />
+            this.state.options.map((city, index) => (
+              <li onClick={this.submitValue}>
+                {city}
+              </li>
             ))
           }
         </ul>
