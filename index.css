@@ -37,6 +37,7 @@ body {
   padding: 5px;
   border: 3px solid transparent;
   transition: 0.3x ease-in-out;
+  color: grey;
 }
 
 .chosen-value:hover {
@@ -67,7 +68,7 @@ body {
 
 .value-list li {
   position: relative;
-  height: 4rem;
+  height: 40px;
   background-color: #fafcfd;
   padding: 1rem;
   font-size: 1.1rem;
@@ -83,20 +84,16 @@ body {
   background-color: #ff908b;
 }
 
-.value-list li.closed {
-  max-height: 0;
-  overflow: hidden;
-  padding: 0;
-  opacity: 0;
-}
-
-
 .weather-card-container {
   width: 100%;
   height: 400px;
   margin-top: 50px;
   color: white;
   text-align: center;
+}
+
+.weather-card-container.closed {
+  visibility: hidden;
 }
 
 .weather-code {

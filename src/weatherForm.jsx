@@ -21,6 +21,7 @@ class WeatherForm extends React.Component {
         })
       } else {
         alert("Please enter valid city name")
+        this.props.displayWeather()
       }
     }
     )

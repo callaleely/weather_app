@@ -12,13 +12,21 @@ class CityDropdown extends React.Component {
     this.submitValue = this.submitValue.bind(this);
   }
 
+  escapeInput(e) {
+    if (e.target.nodeName === "LI") {
+      this.submitValue(e)
+    } else if(e.target.nodeName === "INPUT") {
+      return
+    } else {
+      this.closeDropdown(e)
+    }
+  }
+
   allowFilter(e) {
     const dropdown = document.querySelector(".value-list")
     e.target.placeholder = "Please type at least 3 letters"
     dropdown.classList.add("open")
-    // dropdownArray.forEach(dropdown => {
-    //   dropdown.classList.remove("closed");
-    // })
+    document.querySelector("body").addEventListener("click", this.escapeInput.bind(this))
   }
 
   submitValue(e) {
@@ -29,6 +37,8 @@ class CityDropdown extends React.Component {
   }
 
   closeDropdown(e) {
+    document.querySelector("body").removeEventListener("click", this.escapeInput)
+
     const dropdown = document.querySelector(".value-list")
     const inputEle = document.querySelector(".chosen-value")
     inputEle.placeholder = "Select..";
@@ -49,8 +59,6 @@ class CityDropdown extends React.Component {
       }
     }
     this.setState({options: options})
-
-    // document.querySelector("body").addEventListener("click", this.closeDropdown)
   }
 
   render() {
