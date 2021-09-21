@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --env=jsdom",
+    "start": "open index.html",
     "webpack": "webpack --watch --mode=development"
   },
   "keywords": [],
